@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-server-spring
+  labels:
+    app: app-server
+    release: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-server
+      release: spring
+    
+  template:
+    metadata:
+      name: app-server
+      labels:
+        app: app-server
+        release: spring
+    spec:
+      containers:
+        - name: app-server
+          image: kazuki728/sample-node:1.0.0
+          ports:
+            - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-server-summer
+  labels:
+    app: app-server
+    release: summer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-server
+      release: summer
+    
+  template:
+    metadata:
+      name: app-server
+      labels:
+        app: app-server
+        release: summer
+    spec:
+      containers:
+        - name: app-server
+          image: kazuki728/sample-node:1.0.0
+          ports:
+            - containerPort: 5000
